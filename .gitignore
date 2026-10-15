@@ -1,0 +1,19 @@
+# Local scratch files
+/tmp/
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# LLM training data and generated artifacts
+/LLM/TinyStories-*.txt
+/LLM/llm_project/data/
+/LLM/llm_project/tokenizer.json
+/LLM/llm_project/checkpoints/
+/LLM/llm_project/logs/
+/LLM/llm_project/results/
