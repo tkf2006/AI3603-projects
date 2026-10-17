@@ -17,3 +17,4 @@ __pycache__/
 /LLM/llm_project/checkpoints/
 /LLM/llm_project/logs/
 /LLM/llm_project/results/
+/LLM/submission/

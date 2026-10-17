@@ -1,9 +1,24 @@
 # TinyStories LLM project
 
-This folder contains the tokenizer and data preparation stages of the LLM assignment. It trains a
-byte-level BPE tokenizer on the original `TinyStories-train.txt`, stores
-`<|endoftext|>` as a special token, and saves a course-compatible
-`tokenizer.json`. The validation text is not used for training.
+This folder contains the complete TinyStories language-model workflow: byte-level
+BPE training, data preprocessing, a decoder-only Transformer, training and
+validation, generation, and report figures. The validation text is not used for
+tokenizer or model training. The public repository contains source code; datasets,
+checkpoints, generated results, and the submission package stay local.
+
+## Completed run
+
+The final run used 800,000 stories sampled without replacement from the training
+file (seed 42), one epoch, and a single Tesla V100. The 8,192-token BPE
+tokenizer was trained on the first 200,000 training stories. The model has
+55,504,896 parameters, six Transformer blocks, 12 attention heads, a 768-wide
+hidden state, and a 512-token context window. Training took about 5 hours
+38 minutes, including full validation and checkpoint I/O.
+
+The course `eval_bpb.py` script loaded the submitted `model.py`, `config.json`,
+`tokenizer.json`, and `best.pt` successfully. On the public TinyStories validation
+set it reported an average loss of 1.6129 nats/token and BPB of 0.5615. These
+are local validation results, not scores on the private grading set.
 
 ## Files
 
@@ -15,6 +30,10 @@ byte-level BPE tokenizer on the original `TinyStories-train.txt`, stores
 - `preprocess_data.py`, `preprocess_data.slurm`: CPU preprocessing of a seeded
   800,000-story training subset and the complete validation set.
 - `dataset.py`: reads preprocessed tokens as non-overlapping next-token blocks.
+- `train.py`, `train_short.slurm`, `train_full.slurm`: short and full GPU training.
+- `eval_best.slurm`, `generate_best.py`: independent evaluation and generation.
+- `plot_training_curves.py`, `plot_model_architecture.py`: create report figures
+  from the saved metrics and model structure (requires Matplotlib).
 
 ## Run locally
 
